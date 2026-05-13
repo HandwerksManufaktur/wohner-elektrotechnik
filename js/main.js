@@ -248,12 +248,12 @@ if (testiBtn) {
 
   document.querySelectorAll('.btn, .nav__cta').forEach(btn => {
     btn.addEventListener('mouseenter', function() {
-      this.classList.add('btn--electric');
-      this._sparkIv = setInterval(() => spawnArc(this.getBoundingClientRect()), 200);
-    });
-    btn.addEventListener('mouseleave', function() {
-      this.classList.remove('btn--electric');
-      clearInterval(this._sparkIv);
+      const rect = this.getBoundingClientRect();
+      spawnArc(rect);
+      setTimeout(() => spawnArc(rect), 80);
+      setTimeout(() => spawnArc(rect), 160);
+      this.style.animation = 'electric-flash 0.35s ease-out forwards';
+      setTimeout(() => { this.style.animation = ''; }, 360);
     });
   });
 })();

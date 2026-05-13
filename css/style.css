@@ -232,13 +232,11 @@ body:not(.is-home) .nav .nav__burger, .nav.scrolled .nav__burger { color: var(--
 }
 .hero__eyebrow .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 12px var(--green); animation: pulse 2s ease-in-out infinite; }
 @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-@keyframes electric-glow {
-  0%   { box-shadow: 0 0 3px rgba(250,204,21,0.4), 0 0 8px rgba(250,204,21,0.2); }
-  40%  { box-shadow: 0 0 6px rgba(250,204,21,0.6), 0 0 14px rgba(250,204,21,0.3); }
-  55%  { box-shadow: 0 0 2px rgba(250,204,21,0.2); }
-  100% { box-shadow: 0 0 5px rgba(250,204,21,0.5), 0 0 12px rgba(250,204,21,0.25); }
+@keyframes electric-flash {
+  0%   { box-shadow: none; }
+  30%  { box-shadow: 0 0 8px rgba(250,204,21,0.6), 0 0 16px rgba(250,204,21,0.3); }
+  100% { box-shadow: none; }
 }
-.btn--electric { animation: electric-glow 0.2s linear infinite alternate; }
 
 .hero__title {
   margin-top: 28px; font-size: clamp(40px, 7vw, 88px);
