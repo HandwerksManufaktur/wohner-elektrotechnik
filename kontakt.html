@@ -62,15 +62,15 @@
     <div class="contact-grid">
       <form class="contact-form reveal" id="contact-form">
         <div class="contact-form__row">
-          <div class="field"><label>Vorname</label><input type="text" required></div>
-          <div class="field"><label>Nachname</label><input type="text" required></div>
+          <div class="field"><label>Vorname</label><input type="text" name="vorname" required></div>
+          <div class="field"><label>Nachname</label><input type="text" name="nachname" required></div>
         </div>
         <div class="contact-form__row">
-          <div class="field"><label>E-Mail</label><input type="email" required></div>
-          <div class="field"><label>Telefon</label><input type="tel"></div>
+          <div class="field"><label>E-Mail</label><input type="email" name="email" required></div>
+          <div class="field"><label>Telefon</label><input type="tel" name="telefon"></div>
         </div>
         <div class="field" style="margin-bottom: 16px;"><label>Leistung</label>
-          <select>
+          <select name="leistung">
             <option>PV-Anlage</option>
             <option>Batteriespeicher / Stromspeicher</option>
             <option>Wallbox</option>
@@ -81,7 +81,7 @@
             <option>Sonstiges</option>
           </select>
         </div>
-        <div class="field" style="margin-bottom: 24px;"><label>Nachricht</label><textarea placeholder="Beschreiben Sie kurz Ihr Projekt…"></textarea></div>
+        <div class="field" style="margin-bottom: 24px;"><label>Nachricht</label><textarea name="nachricht" placeholder="Beschreiben Sie kurz Ihr Projekt…"></textarea></div>
         <label style="display:flex; align-items:flex-start; gap:10px; font-size: var(--t-xs); color: var(--ink-mute); margin-bottom: 24px;">
           <input type="checkbox" required style="margin-top: 2px;">
           <span>Ich habe die <a href="datenschutz.html" style="color: var(--blue);">Datenschutzerklärung</a> zur Kenntnis genommen und stimme der Verarbeitung meiner Daten zu.</span>

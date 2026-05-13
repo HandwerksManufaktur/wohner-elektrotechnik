@@ -104,14 +104,34 @@ if (lb) {
   });
 }
 
-// Contact form (demo handler — replace with real backend)
+// Contact form – Formspree
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
-  contactForm.addEventListener('submit', (e) => {
+  contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn = contactForm.querySelector('button[type="submit"]');
-    btn.textContent = 'Gesendet ✓';
-    btn.style.background = 'var(--green)';
+    btn.disabled = true;
+    btn.textContent = 'Wird gesendet…';
+    try {
+      const res = await fetch('https://formspree.io/f/mzdowkak', {
+        method: 'POST',
+        body: new FormData(contactForm),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        btn.textContent = 'Nachricht gesendet ✓';
+        btn.style.background = 'var(--green)';
+        contactForm.reset();
+      } else {
+        btn.textContent = 'Fehler – bitte erneut versuchen';
+        btn.style.background = '#c0392b';
+        btn.disabled = false;
+      }
+    } catch {
+      btn.textContent = 'Fehler – bitte erneut versuchen';
+      btn.style.background = '#c0392b';
+      btn.disabled = false;
+    }
   });
 }
 
