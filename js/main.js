@@ -1,4 +1,4 @@
-/* Wohner Elektrotechnik — main.js */
+/* Elektrotechnik Wohner — main.js */
 
 // Mobile burger menu
 const burger = document.getElementById('burger');
