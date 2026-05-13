@@ -201,40 +201,58 @@ if (testiBtn) {
   document.getElementById('cookieDecline').addEventListener('click', () => dismiss('declined'));
 })();
 
-// Electric hover sparks on buttons
+// Electric hover effect on buttons – SVG arc sparks + glow
 (function() {
-  const COLORS = ['#60a5fa','#93c5fd','#ffffff','#3b82f6','#bfdbfe'];
+  const NS = 'http://www.w3.org/2000/svg';
+  const STROKE_COLORS = ['#93c5fd','#60a5fa','#ffffff','#bfdbfe'];
 
-  function spawnEdgeSpark(btn) {
-    const rect = btn.getBoundingClientRect();
+  function edgePoint(rect) {
     const side = Math.floor(Math.random() * 4);
-    let x, y;
-    if (side === 0)      { x = rect.left + Math.random() * rect.width; y = rect.top; }
-    else if (side === 1) { x = rect.right; y = rect.top + Math.random() * rect.height; }
-    else if (side === 2) { x = rect.left + Math.random() * rect.width; y = rect.bottom; }
-    else                 { x = rect.left; y = rect.top + Math.random() * rect.height; }
+    if (side === 0) return { x: rect.left + Math.random() * rect.width, y: rect.top };
+    if (side === 1) return { x: rect.right, y: rect.top + Math.random() * rect.height };
+    if (side === 2) return { x: rect.left + Math.random() * rect.width, y: rect.bottom };
+    return { x: rect.left, y: rect.top + Math.random() * rect.height };
+  }
 
-    const el = document.createElement('span');
-    const size = 1.5 + Math.random() * 2.5;
-    const isLine = Math.random() > 0.6;
-    el.style.cssText = `position:fixed;left:${x}px;top:${y}px;width:${isLine ? size * 2.5 : size}px;height:${size}px;background:${COLORS[Math.floor(Math.random()*COLORS.length)]};border-radius:2px;pointer-events:none;z-index:9999;box-shadow:0 0 5px #60a5fa;will-change:transform,opacity;transition:transform 0.4s ease-out,opacity 0.4s ease-out;transform:translate(-50%,-50%);opacity:0.9;`;
-    document.body.appendChild(el);
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-    const outAngle = Math.atan2(y - cy, x - cx) + (Math.random() - 0.5) * 0.9;
-    const dist = 6 + Math.random() * 14;
-    requestAnimationFrame(() => requestAnimationFrame(() => {
-      el.style.transform = `translate(calc(-50% + ${Math.cos(outAngle)*dist}px), calc(-50% + ${Math.sin(outAngle)*dist}px)) rotate(${outAngle}rad)`;
-      el.style.opacity = '0';
-    }));
-    setTimeout(() => el.remove(), 450);
+  function zigzagPath(x1, y1, x2, y2) {
+    const steps = 4 + Math.floor(Math.random() * 3);
+    let d = `M${x1},${y1}`;
+    for (let i = 1; i < steps; i++) {
+      const t = i / steps;
+      const mx = x1 + (x2 - x1) * t + (Math.random() - 0.5) * 14;
+      const my = y1 + (y2 - y1) * t + (Math.random() - 0.5) * 14;
+      d += ` L${mx},${my}`;
+    }
+    return d + ` L${x2},${y2}`;
+  }
+
+  function spawnArc(rect) {
+    const p1 = edgePoint(rect);
+    const p2 = edgePoint(rect);
+    const svg = document.createElementNS(NS, 'svg');
+    svg.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:9999;overflow:visible;';
+    const path = document.createElementNS(NS, 'path');
+    path.setAttribute('d', zigzagPath(p1.x, p1.y, p2.x, p2.y));
+    path.setAttribute('stroke', STROKE_COLORS[Math.floor(Math.random() * STROKE_COLORS.length)]);
+    path.setAttribute('stroke-width', 1 + Math.random());
+    path.setAttribute('fill', 'none');
+    path.setAttribute('stroke-linecap', 'round');
+    path.style.filter = 'drop-shadow(0 0 3px #60a5fa) drop-shadow(0 0 6px #3b82f6)';
+    path.style.opacity = '0.9';
+    path.style.transition = 'opacity 0.25s ease-out';
+    svg.appendChild(path);
+    document.body.appendChild(svg);
+    requestAnimationFrame(() => requestAnimationFrame(() => { path.style.opacity = '0'; }));
+    setTimeout(() => svg.remove(), 280);
   }
 
   document.querySelectorAll('.btn, .nav__cta').forEach(btn => {
     btn.addEventListener('mouseenter', function() {
-      this._sparkIv = setInterval(() => spawnEdgeSpark(this), 90);
+      this.classList.add('btn--electric');
+      this._sparkIv = setInterval(() => spawnArc(this.getBoundingClientRect()), 120);
     });
     btn.addEventListener('mouseleave', function() {
+      this.classList.remove('btn--electric');
       clearInterval(this._sparkIv);
     });
   });
