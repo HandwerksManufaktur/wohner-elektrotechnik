@@ -736,3 +736,25 @@ section.section { padding: 112px 0; position: relative; }
 .news-card__date { font-family: var(--font-mono); font-size: var(--t-xs); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--blue); }
 .news-card__title { font-size: var(--t-md); font-weight: 700; color: var(--ink); letter-spacing: -0.01em; margin-top: 10px; line-height: 1.35; }
 .news-card__text { font-size: var(--t-sm); color: var(--ink-mute); margin-top: 10px; line-height: 1.6; }
+
+/* Portrait Marquee */
+.portrait-marquee { overflow: hidden; padding: 48px 0; }
+.portrait-marquee__track {
+  display: flex;
+  gap: 12px;
+  width: max-content;
+  animation: portrait-scroll 32s linear infinite;
+}
+.portrait-marquee__track:hover { animation-play-state: paused; }
+.portrait-marquee__track img {
+  height: 280px;
+  width: auto;
+  border-radius: var(--r-md);
+  object-fit: cover;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+@keyframes portrait-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
