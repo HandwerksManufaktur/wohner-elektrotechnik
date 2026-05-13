@@ -200,3 +200,30 @@ if (testiBtn) {
   document.getElementById('cookieAccept').addEventListener('click', () => dismiss('accepted'));
   document.getElementById('cookieDecline').addEventListener('click', () => dismiss('declined'));
 })();
+
+// Electric spark effect on click
+(function() {
+  const COLORS = ['#60a5fa','#93c5fd','#ffffff','#3b82f6','#bfdbfe'];
+  function spawnSparks(x, y) {
+    const count = 12;
+    for (let i = 0; i < count; i++) {
+      const el = document.createElement('span');
+      const size = 2 + Math.random() * 4;
+      const isLine = Math.random() > 0.5;
+      el.style.cssText = `position:fixed;left:${x}px;top:${y}px;width:${isLine ? size * 3 : size}px;height:${size}px;background:${COLORS[i % COLORS.length]};border-radius:2px;pointer-events:none;z-index:9999;box-shadow:0 0 6px #60a5fa,0 0 12px #3b82f6;will-change:transform,opacity;transition:transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94),opacity 0.55s ease-out;transform:translate(-50%,-50%);`;
+      document.body.appendChild(el);
+      const angle = (Math.PI * 2 / count) * i + (Math.random() - 0.5) * 0.8;
+      const dist = 20 + Math.random() * 50;
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        el.style.transform = `translate(calc(-50% + ${Math.cos(angle) * dist}px), calc(-50% + ${Math.sin(angle) * dist}px)) rotate(${angle}rad)`;
+        el.style.opacity = '0';
+      }));
+      setTimeout(() => el.remove(), 600);
+    }
+  }
+  document.addEventListener('click', function(e) {
+    if (e.target.closest('a, button, .btn, .gallery-item, .nav__brand')) {
+      spawnSparks(e.clientX, e.clientY);
+    }
+  });
+})();

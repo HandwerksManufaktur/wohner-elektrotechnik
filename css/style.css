@@ -144,8 +144,17 @@ body.is-home .nav:not(.scrolled) .nav__brand img {
   font-size: var(--t-xs); font-weight: 600;
   letter-spacing: 0.06em; text-transform: uppercase;
   transition: all 0.25s var(--ease); white-space: nowrap;
+  overflow: hidden; position: relative;
 }
-.nav__cta:hover { background: var(--blue-deep); transform: translateY(-1px); box-shadow: var(--shadow-blue); }
+.nav__cta::before {
+  content: '⚡';
+  position: absolute; left: -20px;
+  top: 50%; transform: translateY(-50%);
+  font-size: 14px; opacity: 0;
+  transition: left 0.25s var(--ease), opacity 0.2s var(--ease);
+}
+.nav__cta:hover::before { left: 10px; opacity: 1; }
+.nav__cta:hover { background: var(--blue-deep); transform: translateY(-1px); box-shadow: var(--shadow-blue); padding-left: 30px; }
 
 .nav__burger { display: none; width: 36px; height: 36px; flex-direction: column; gap: 5px; align-items: center; justify-content: center; }
 .nav__mobile { display: none; }
