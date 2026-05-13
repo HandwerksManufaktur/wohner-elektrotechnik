@@ -226,7 +226,7 @@ body:not(.is-home) .nav .nav__burger, .nav.scrolled .nav__burger { color: var(--
 @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 @keyframes electric-flash {
   0%   { box-shadow: none; }
-  30%  { box-shadow: 0 0 8px rgba(250,204,21,0.6), 0 0 16px rgba(250,204,21,0.3); }
+  30%  { box-shadow: 0 0 5px rgba(250,204,21,0.3), 0 0 10px rgba(250,204,21,0.15); }
   100% { box-shadow: none; }
 }
 

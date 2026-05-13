@@ -250,9 +250,8 @@ if (testiBtn) {
     btn.addEventListener('mouseenter', function() {
       const rect = this.getBoundingClientRect();
       // Initial burst
-      spawnArc(rect);
-      setTimeout(() => spawnArc(rect), 80);
-      setTimeout(() => spawnArc(rect), 160);
+      spawnArc(rect, 0.3);
+      setTimeout(() => spawnArc(rect, 0.2), 120);
       this.style.animation = 'electric-flash 0.35s ease-out forwards';
       setTimeout(() => { this.style.animation = ''; }, 360);
       // Subtle trickle while hovering
