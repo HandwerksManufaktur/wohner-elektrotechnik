@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seite nicht gefunden — Elektrotechnik Wohner</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/favicon.png">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .error-page { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--bg-deep); }
+    .error-page__inner { text-align: center; padding: 40px 24px; max-width: 560px; }
+    .error-page__code { font-family: var(--font-mono); font-size: clamp(80px, 15vw, 140px); font-weight: 700; color: var(--blue-bright); line-height: 1; letter-spacing: -0.04em; }
+    .error-page__title { font-size: clamp(22px, 4vw, 36px); font-weight: 800; color: #fff; margin-top: 16px; letter-spacing: -0.02em; }
+    .error-page__sub { color: rgba(255,255,255,0.6); font-size: var(--t-md); margin-top: 12px; line-height: 1.6; }
+    .error-page__actions { margin-top: 40px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+<nav class="nav scrolled" id="nav">
+  <div class="nav__inner">
+    <a href="/" class="nav__brand">
+      <img src="assets/logo.jpg" alt="Elektrotechnik Wohner">
+    </a>
+    <ul class="nav__links">
+      <li><a href="/" data-page="home">Home</a></li>
+      <li><a href="/ueber-uns" data-page="ueber-uns">Über uns</a></li>
+      <li><a href="/pv-anlagen" data-page="pv-anlagen">PV-Anlagen</a></li>
+      <li><a href="/ladestationen" data-page="ladestationen">Ladestationen</a></li>
+      <li><a href="/elektroinstallation" data-page="elektroinstallation">Elektro</a></li>
+      <li><a href="/smart-home" data-page="smart-home">Smart Home</a></li>
+      <li><a href="/erdarbeiten" data-page="erdarbeiten">Tiefbau</a></li>
+    </ul>
+    <a href="/kontakt" class="nav__cta">Kontakt</a>
+    <button class="nav__burger" id="burger" aria-label="Menü"><span></span><span></span><span></span></button>
+  </div>
+  <div class="nav__mobile">
+    <a href="/">Home</a>
+    <a href="/ueber-uns">Über uns</a>
+    <a href="/pv-anlagen">PV-Anlagen</a>
+    <a href="/ladestationen">Ladestationen</a>
+    <a href="/elektroinstallation">Elektroinstallation</a>
+    <a href="/smart-home">Smart Home</a>
+    <a href="/erdarbeiten">Tiefbau</a>
+    <a href="/kontakt">Kontakt</a>
+  </div>
+</nav>
+
+<main>
+  <div class="error-page">
+    <div class="error-page__inner">
+      <div class="error-page__code">404</div>
+      <h1 class="error-page__title">Seite nicht gefunden</h1>
+      <p class="error-page__sub">Die gesuchte Seite existiert nicht oder wurde verschoben. Kein Problem – hier finden Sie den Weg zurück.</p>
+      <div class="error-page__actions">
+        <a href="/" class="btn btn--primary">Zur Startseite →</a>
+        <a href="/kontakt" class="btn btn--ghost">Kontakt aufnehmen</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="js/main.js"></script>
+</body>
+</html>

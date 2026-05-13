@@ -40,6 +40,25 @@ document.querySelectorAll('.filter-tabs').forEach(group => {
   });
 });
 
+// Randomize gallery images on subpages every page load
+(function() {
+  document.querySelectorAll('.gallery').forEach(function(gallery) {
+    var items = Array.from(gallery.querySelectorAll('.gallery-item[data-img]'));
+    if (items.length < 2) return;
+    if (items[0].hasAttribute('data-cat')) return; // skip home filter gallery
+    var srcs = items.map(function(it) { return it.dataset.img; });
+    for (var i = srcs.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = srcs[i]; srcs[i] = srcs[j]; srcs[j] = t;
+    }
+    items.forEach(function(it, idx) {
+      it.dataset.img = srcs[idx];
+      var img = it.querySelector('img');
+      if (img) img.src = srcs[idx];
+    });
+  });
+})();
+
 // Lightbox
 const lb = document.getElementById('lightbox');
 const lbImg = document.getElementById('lbImg');
