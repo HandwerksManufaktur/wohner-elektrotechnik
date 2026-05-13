@@ -112,6 +112,8 @@ if (contactForm) {
     const btn = contactForm.querySelector('button[type="submit"]');
     btn.disabled = true;
     btn.textContent = 'Wird gesendet…';
+    const timeField = document.getElementById('form-time');
+    if (timeField) timeField.value = new Date().toLocaleString('de-DE', { timeZone: 'Europe/Berlin' });
     try {
       const res = await fetch('https://formspree.io/f/mzdowkak', {
         method: 'POST',
