@@ -204,7 +204,7 @@ if (testiBtn) {
 // Electric hover effect on buttons – SVG arc sparks + glow
 (function() {
   const NS = 'http://www.w3.org/2000/svg';
-  const STROKE_COLORS = ['#93c5fd','#60a5fa','#ffffff','#bfdbfe'];
+  const STROKE_COLORS = ['#facc15','#fde68a','#fbbf24','#ffffff'];
 
   function edgePoint(rect) {
     const side = Math.floor(Math.random() * 4);
@@ -237,8 +237,8 @@ if (testiBtn) {
     path.setAttribute('stroke-width', 1 + Math.random());
     path.setAttribute('fill', 'none');
     path.setAttribute('stroke-linecap', 'round');
-    path.style.filter = 'drop-shadow(0 0 3px #60a5fa) drop-shadow(0 0 6px #3b82f6)';
-    path.style.opacity = '0.9';
+    path.style.filter = 'drop-shadow(0 0 2px rgba(250,204,21,0.8))';
+    path.style.opacity = '0.55';
     path.style.transition = 'opacity 0.25s ease-out';
     svg.appendChild(path);
     document.body.appendChild(svg);
@@ -249,7 +249,7 @@ if (testiBtn) {
   document.querySelectorAll('.btn, .nav__cta').forEach(btn => {
     btn.addEventListener('mouseenter', function() {
       this.classList.add('btn--electric');
-      this._sparkIv = setInterval(() => spawnArc(this.getBoundingClientRect()), 120);
+      this._sparkIv = setInterval(() => spawnArc(this.getBoundingClientRect()), 200);
     });
     btn.addEventListener('mouseleave', function() {
       this.classList.remove('btn--electric');
