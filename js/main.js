@@ -226,7 +226,7 @@ if (testiBtn) {
     return d + ` L${x2},${y2}`;
   }
 
-  function spawnArc(rect) {
+  function spawnArc(rect, opacity) {
     const p1 = edgePoint(rect);
     const p2 = edgePoint(rect);
     const svg = document.createElementNS(NS, 'svg');
@@ -238,7 +238,7 @@ if (testiBtn) {
     path.setAttribute('fill', 'none');
     path.setAttribute('stroke-linecap', 'round');
     path.style.filter = 'drop-shadow(0 0 2px rgba(250,204,21,0.8))';
-    path.style.opacity = '0.55';
+    path.style.opacity = String(opacity !== undefined ? opacity : 0.55);
     path.style.transition = 'opacity 0.25s ease-out';
     svg.appendChild(path);
     document.body.appendChild(svg);
@@ -249,11 +249,19 @@ if (testiBtn) {
   document.querySelectorAll('.btn, .nav__cta').forEach(btn => {
     btn.addEventListener('mouseenter', function() {
       const rect = this.getBoundingClientRect();
+      // Initial burst
       spawnArc(rect);
       setTimeout(() => spawnArc(rect), 80);
       setTimeout(() => spawnArc(rect), 160);
       this.style.animation = 'electric-flash 0.35s ease-out forwards';
       setTimeout(() => { this.style.animation = ''; }, 360);
+      // Subtle trickle while hovering
+      this._sparkIv = setInterval(() => {
+        if (Math.random() > 0.4) spawnArc(this.getBoundingClientRect(), 0.2);
+      }, 380);
+    });
+    btn.addEventListener('mouseleave', function() {
+      clearInterval(this._sparkIv);
     });
   });
 
