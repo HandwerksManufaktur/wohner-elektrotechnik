@@ -246,29 +246,35 @@ if (testiBtn) {
     setTimeout(() => svg.remove(), 280);
   }
 
+  function triggerBurst(el) {
+    const rect = el.getBoundingClientRect();
+    spawnArc(rect, 0.3);
+    setTimeout(() => spawnArc(rect, 0.2), 120);
+    el.style.animation = 'electric-flash 0.35s ease-out forwards';
+    setTimeout(() => { el.style.animation = ''; }, 360);
+  }
+
   document.querySelectorAll('.btn, .nav__cta').forEach(btn => {
     btn.addEventListener('mouseenter', function() {
-      const rect = this.getBoundingClientRect();
-      // Initial burst
-      spawnArc(rect, 0.3);
-      setTimeout(() => spawnArc(rect, 0.2), 120);
-      this.style.animation = 'electric-flash 0.35s ease-out forwards';
-      setTimeout(() => { this.style.animation = ''; }, 360);
-      // Subtle trickle while hovering
+      triggerBurst(this);
       this._sparkIv = setInterval(() => {
         if (Math.random() > 0.4) spawnArc(this.getBoundingClientRect(), 0.2);
       }, 380);
     });
-    btn.addEventListener('mouseleave', function() {
-      clearInterval(this._sparkIv);
-    });
+    btn.addEventListener('mouseleave', function() { clearInterval(this._sparkIv); });
+    btn.addEventListener('touchstart', function() { triggerBurst(this); }, { passive: true });
   });
 
-  document.querySelectorAll('.nav__links a').forEach(link => {
+  document.querySelectorAll('.nav__links a, .nav__mobile a').forEach(link => {
     link.addEventListener('mouseenter', function() {
       const rect = this.getBoundingClientRect();
-      spawnArc(rect);
-      setTimeout(() => spawnArc(rect), 100);
+      spawnArc(rect, 0.3);
+      setTimeout(() => spawnArc(rect, 0.2), 100);
     });
+    link.addEventListener('touchstart', function() {
+      const rect = this.getBoundingClientRect();
+      spawnArc(rect, 0.3);
+      setTimeout(() => spawnArc(rect, 0.2), 100);
+    }, { passive: true });
   });
 })();
