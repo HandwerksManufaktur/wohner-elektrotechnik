@@ -96,7 +96,7 @@ body.is-home .nav:not(.scrolled) .nav__links a:hover { color: #fff; }
 .nav.scrolled .nav__links a:hover, body:not(.is-home) .nav .nav__links a:hover { color: var(--blue); }
 .nav.scrolled .nav__links a.active, body:not(.is-home) .nav .nav__links a.active { color: var(--blue); }
 
-.nav__brand { display: flex; align-items: center; flex-shrink: 0; margin-left: 5px; }
+.nav__brand { display: flex; align-items: center; flex-shrink: 0; margin-left: 10px; }
 .nav__brand img {
   height: 54px; width: auto;
   border-radius: var(--r-sm);
