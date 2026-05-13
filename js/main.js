@@ -256,4 +256,12 @@ if (testiBtn) {
       setTimeout(() => { this.style.animation = ''; }, 360);
     });
   });
+
+  document.querySelectorAll('.nav__links a').forEach(link => {
+    link.addEventListener('mouseenter', function() {
+      const rect = this.getBoundingClientRect();
+      spawnArc(rect);
+      setTimeout(() => spawnArc(rect), 100);
+    });
+  });
 })();
