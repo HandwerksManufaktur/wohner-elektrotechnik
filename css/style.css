@@ -594,7 +594,8 @@ section.section { padding: 112px 0; position: relative; }
 
 /* ============ SUB-PAGE HERO ============ */
 .subhero { position: relative; padding: 200px 0 120px; overflow: hidden; background: var(--bg-soft); border-bottom: 1px solid var(--line); }
-.subhero__bg { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0.55; z-index: 0; }
+.subhero__bg { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0.55; z-index: 0; transition: opacity 1.5s ease-in-out; }
+.subhero__bg--slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; z-index: 0; transition: opacity 1.5s ease-in-out; }
 .subhero__overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,14,26,0.55) 0%, rgba(10,14,26,0.85) 100%); z-index: 1; }
 .subhero__inner { position: relative; z-index: 2; max-width: 800px; }
 .subhero__title { margin-top: 20px; font-size: clamp(40px, 6vw, 72px); font-weight: 800; line-height: 1.05; letter-spacing: -0.03em; text-transform: uppercase; color: #fff; }

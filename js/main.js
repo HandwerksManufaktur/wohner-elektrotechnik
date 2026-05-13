@@ -111,6 +111,31 @@ if (testiBtn) {
   });
 }
 
+// Subhero slideshow
+(function() {
+  var bg = document.querySelector('.subhero__bg[data-slideshow]');
+  if (!bg) return;
+  var srcs = bg.dataset.slideshow.split(',').map(function(s) { return s.trim(); });
+  if (srcs.length < 2) return;
+  var bgPos = bg.style.backgroundPosition || 'center center';
+  var layers = [bg];
+  srcs.slice(1).forEach(function(src) {
+    var d = document.createElement('div');
+    d.className = 'subhero__bg--slide';
+    d.style.backgroundImage = 'url(' + src + ')';
+    d.style.backgroundPosition = bgPos;
+    bg.parentNode.insertBefore(d, bg.nextSibling);
+    layers.push(d);
+  });
+  var idx = 0;
+  setInterval(function() {
+    layers[idx].style.opacity = '0';
+    idx = (idx + 1) % layers.length;
+    layers[idx].style.opacity = layers[idx].classList.contains('subhero__bg--slide') ? '0.55' : '0.55';
+    layers[idx].style.opacity = '0.55';
+  }, 5000);
+})();
+
 // Cookie consent banner
 (function() {
   if (localStorage.getItem('cookie-consent')) return;
